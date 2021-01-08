@@ -1,0 +1,42 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion rootProject.ext.android["compileSdkVersion"]
+    buildToolsVersion rootProject.ext.android["buildToolsVersion"]
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.android["minSdkVersion"]
+        targetSdkVersion rootProject.ext.android["targetSdkVersion"]
+        versionCode rootProject.ext.android["versionCode"]
+        versionName rootProject.ext.android["versionName"]
+
+        // 64k
+        multiDexEnabled true
+        // 支持模糊视图
+        renderscriptSupportModeEnabled true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    /*序列化是将对象转化为字节流的过程*/
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    api project(':base')
+    api rootProject.ext.dependencies["core-ktx"]
+    api rootProject.ext.dependencies["appcompat"]
+    api rootProject.ext.dependencies["retrofit"]
+    api rootProject.ext.dependencies["retrofit-converter-gson"]
+    api rootProject.ext.dependencies["retrofit-adapter-rxjava2"]
+    api rootProject.ext.dependencies["logging-interceptor"]
+    api rootProject.ext.dependencies["rxjava"]
+    api rootProject.ext.dependencies["rxandroid"]
+    api rootProject.ext.dependencies["retrofit-adapter-rxjava2"]
+}

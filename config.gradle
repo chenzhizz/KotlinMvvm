@@ -1,0 +1,80 @@
+ext {
+    //  true:作为application存在  false:作为Lib组件存在
+    isApplication = false
+    isNewsApplication = true//news模块
+
+    android = [
+            compileSdkVersion: 29,
+            buildToolsVersion: "29.0.3",
+            minSdkVersion    : 17,
+            targetSdkVersion : 29,
+            versionCode      : 1,
+            versionName      : "1.0"    //必须是int或者float，否则影响线上升级
+    ]
+
+    version = [
+            /*androidx-version*/
+            androidxVersion   : "1.2.1",
+            constraintlayout  : "2.0.1",
+            googleVersion:"1.1.0",
+            /*kotlin-version*/
+            kotlin_version    : "1.3.72",
+            core_ktx          : "1.3.1",
+            /*路由*/
+            router            : "1.4.1",
+            router_compiler   : "1.2.2",
+            retrofitSdkVersion: "2.4.0",
+            okhttp            : "4.7.2",
+            glideSdkVersion   : "4.11.0",
+            smartRefreshSdkVersion:"2.0.1",
+            BaseRecyclerViewAdapterHelper:"3.0.4",
+
+    ]
+
+    dependencies = [
+            /*----------------------------------multidex  方法超限--------------------------------------------------*/
+            "multidex"                 : "androidx.multidex:multidex:2.0.1",
+            /*----------------------------------androidx--------------------------------------------------*/
+            "appcompat"               : "androidx.appcompat:appcompat:1.3.0-alpha02",
+            "constraintlayout"        : "androidx.constraintlayout:constraintlayout:${version["constraintlayout"]}",
+            "material":"com.google.android.material:material:${version["androidxVersion"]}",
+            "recyclerview":"androidx.recyclerview:recyclerview:${version["googleVersion"]}",
+            /*------------------------------------lifecycle-----------------------------------------*/
+            "lifecycle-extensions":'androidx.lifecycle:lifecycle-extensions:2.2.0',
+            /*----------------------------------kotlin   核心库*-------------------------------------*/
+            "core-ktx"                : "androidx.core:core-ktx:${version["core_ktx"]}",
+            /*-------------------------------------路由---------------------------------------------*/
+            "router-api"             : "com.alibaba:arouter-api:${version["router"]}",
+            "router-compiler"         : "com.alibaba:arouter-compiler:${version["router_compiler"]}",
+            "router-annotation"         : "com.alibaba:arouter-annotation:1.0.4",
+
+
+            /*-----------------------------------  Retrofit--------------------------------------------*/
+            "retrofit"                : "com.squareup.retrofit2:retrofit:${version["retrofitSdkVersion"]}",
+            "retrofit-converter-gson" : "com.squareup.retrofit2:converter-gson:${version["retrofitSdkVersion"]}",
+            "retrofit-adapter-rxjava2": "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0",
+            /*-------------------------------------OKHttp3日志拦截器-----------------------------------------*/
+            "logging-interceptor"     : "com.squareup.okhttp3:logging-interceptor:${version["okhttp"]}",
+            /*------------------------------------rxJava-----------------------------------------*/
+            "rxjava"                  : "io.reactivex.rxjava2:rxjava:2.1.14",
+            /*------------------------------------rxAndroid-----------------------------------------*/
+            "rxandroid"               : "io.reactivex.rxjava2:rxandroid:2.0.2",
+            /*------------------------------------util-----------------------------------------*/
+            "utilcodex"               : "com.blankj:utilcodex:1.29.0",
+            /*------------------------------------glide-----------------------------------------*/
+            "glide"                    : "com.github.bumptech.glide:glide:${version["glideSdkVersion"]}",
+            "glide-compiler"           : "com.github.bumptech.glide:compiler:${version["glideSdkVersion"]}",
+            /*--------------------------------------smart:refresh---------------------------------------------------*/
+            //核心必须依赖
+            "smart-layout-kernel"                    : "com.scwang.smart:refresh-layout-kernel:${version["smartRefreshSdkVersion"]}",
+            //经典刷新头
+            "smart-header-classics"                    : "com.scwang.smart:refresh-header-classics:${version["smartRefreshSdkVersion"]}",
+            //经典加载
+            "smart-footer-classics"                    : "com.scwang.smart:refresh-footer-classics:${version["smartRefreshSdkVersion"]}",
+            "BaseRecyclerViewAdapterHelper"                    : "com.github.CymChad:BaseRecyclerViewAdapterHelper:${version["BaseRecyclerViewAdapterHelper"]}",
+
+
+    ]
+
+
+}

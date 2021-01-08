@@ -1,0 +1,55 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+    }
+}
+android {
+    compileSdkVersion rootProject.ext.android["compileSdkVersion"]
+    buildToolsVersion rootProject.ext.android["buildToolsVersion"]
+
+    defaultConfig {
+        applicationId "com.sumansoul.kotlinDemo"
+        minSdkVersion rootProject.ext.android["minSdkVersion"]
+        targetSdkVersion rootProject.ext.android["targetSdkVersion"]
+        versionCode rootProject.ext.android["versionCode"]
+        versionName rootProject.ext.android["versionName"]
+        // 64k
+        multiDexEnabled true
+        // 支持模糊视图
+        renderscriptSupportModeEnabled true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    dataBinding{
+        //noinspection DataBindingWithoutKapt
+        enabled=true
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    //添加Kotlin 标准库
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+//    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    api rootProject.ext.dependencies["appcompat"]
+    api rootProject.ext.dependencies["constraintlayout"]
+    api rootProject.ext.dependencies["core-ktx"]
+    api project(':module_news')
+
+    api  rootProject.ext.dependencies["router-api"]
+    api rootProject.ext.dependencies["router-annotation"]
+    implementation 'com.google.android.material:material:1.2.1'
+    implementation 'androidx.annotation:annotation:1.1.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    kapt rootProject.ext.dependencies["router-compiler"]
+}

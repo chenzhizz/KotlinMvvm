@@ -1,0 +1,60 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+    }
+}
+
+android {
+    compileSdkVersion rootProject.ext.android["compileSdkVersion"]
+    buildToolsVersion rootProject.ext.android["buildToolsVersion"]
+
+    defaultConfig {
+
+        minSdkVersion rootProject.ext.android["minSdkVersion"]
+        targetSdkVersion rootProject.ext.android["targetSdkVersion"]
+        versionCode rootProject.ext.android["versionCode"]
+        versionName rootProject.ext.android["versionName"]
+
+        // 64k
+        multiDexEnabled true
+        // 支持模糊视图
+        renderscriptSupportModeEnabled true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    dataBinding{
+        enabled=true
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    api project(':common')
+    api rootProject.ext.dependencies["appcompat"]
+    api rootProject.ext.dependencies["constraintlayout"]
+    api rootProject.ext.dependencies["core-ktx"]
+    api rootProject.ext.dependencies["material"]
+    api rootProject.ext.dependencies["lifecycle-extensions"]
+    api rootProject.ext.dependencies["glide"]
+    kapt rootProject.ext.dependencies["glide-compiler"]
+    api rootProject.ext.dependencies["smart-layout-kernel"]
+    api rootProject.ext.dependencies["smart-header-classics"]
+    api rootProject.ext.dependencies["smart-footer-classics"]
+
+//    api  rootProject.ext.dependencies["router-api"]
+//    api rootProject.ext.dependencies["router-annotation"]
+    kapt rootProject.ext.dependencies["router-compiler"]
+    api rootProject.ext.dependencies["BaseRecyclerViewAdapterHelper"]
+
+}
