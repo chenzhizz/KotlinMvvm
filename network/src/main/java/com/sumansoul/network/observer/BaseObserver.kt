@@ -10,14 +10,10 @@ import io.reactivex.disposables.Disposable
  * Date: 2020/7/24
  * Time: 14:09
  */
-   class BaseObserver <T>: Observer<T> {
-    //var baseModel:MvvmBaseModel<F,T>
+   class BaseObserver <T>// this.baseModel = baseModel
+    (//var baseModel:MvvmBaseModel<F,T>
     var mvvmNetWorkObserver: MvvmNetWorkObserver<T>
-
-    constructor( mvvmNetWorkObserver: MvvmNetWorkObserver<T>) {
-       // this.baseModel = baseModel
-        this.mvvmNetWorkObserver = mvvmNetWorkObserver
-    }
+) : Observer<T> {
 
 
     override fun onComplete() {

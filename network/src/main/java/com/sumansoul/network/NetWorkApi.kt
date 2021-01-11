@@ -3,6 +3,7 @@ package com.sumansoul.network
 
 
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import com.sumansoul.network.NetWorkApi.Companion.retrofitHashMap
 import com.sumansoul.network.commoninterceptor.CommonRequestInterceptor
 import com.sumansoul.network.commoninterceptor.CommonResposeInterceptor
 import com.sumansoul.network.environment.IEnvironment
@@ -49,27 +50,25 @@ abstract class NetWorkApi : IEnvironment{
 
     private var mBaseUrl:String
     private lateinit var mOkHttpClient:OkHttpClient
-    constructor() {
-        if (mIsFormat) {
-            mBaseUrl=getFormal()
-            return
-        }
-        mBaseUrl=getTest()
+
+    init {
+        mBaseUrl = (if (mIsFormat) getFormal() else getTest())
+
     }
 
 
     fun <T> getRetrofit(server: Class<T>): Retrofit {
-        if (retrofitHashMap[mBaseUrl + server.name] != null) {
+        retrofitHashMap[mBaseUrl + server.name]?.let {
             return retrofitHashMap[mBaseUrl + server.name]!!
         }
-        var builder: Retrofit.Builder = Retrofit.Builder()
-        builder.baseUrl(mBaseUrl)
-        builder.client(getOkHttpClient())
-        builder.addConverterFactory(GsonConverterFactory.create())
-        builder.addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-        var retrofit: Retrofit = builder.build()
+        val retrofit: Retrofit = Retrofit.Builder().apply {
+            baseUrl(mBaseUrl)
+            client(getOkHttpClient())
+            addConverterFactory(GsonConverterFactory.create())
+            addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+        }.build()
         retrofitHashMap[mBaseUrl + server.name] = retrofit
-        return retrofit
+         return retrofit
     }
 
 //    fun <T> getService(service: Class<T>): T {
@@ -101,7 +100,8 @@ abstract class NetWorkApi : IEnvironment{
 
     fun <T> applySchedluers(observer: Observer<T>): ObservableTransformer<T, T>? {
         return ObservableTransformer<T, T> { upstream ->
-            var observable = upstream.subscribeOn(Schedulers.io())
+            var observable = upstream
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(getAppErrorHandler<T>())
                 .onErrorResumeNext(HttpErrorHandler<T>())
