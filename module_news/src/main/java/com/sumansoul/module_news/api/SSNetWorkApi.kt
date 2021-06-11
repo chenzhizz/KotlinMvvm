@@ -1,5 +1,6 @@
 package com.sumansoul.module_news.api
 
+import com.blankj.utilcode.util.DeviceUtils
 import com.sumansoul.network.BaseRepose
 import com.sumansoul.network.NetWorkApi
 import com.sumansoul.network.exception.ExceptionHandle
@@ -37,30 +38,28 @@ class SSNetWorkApi private constructor(): NetWorkApi() {
     override fun getInterceptor(): Interceptor {
         return object : Interceptor {
             override fun intercept(chain: Interceptor.Chain): Response {
-                var builder = chain.request().newBuilder()
-                builder.addHeader("device", NetWorkApi.device)
-                builder.addHeader("token", NetWorkApi.token)
-                return chain.proceed(builder.build())
+                return chain.proceed(
+                    chain.request().newBuilder().apply {
+                    this.addHeader("device", NetWorkApi.device)
+                    this.addHeader("token", NetWorkApi.token)
+                }.build())
             }
 
         }
     }
 
     override fun <T> getAppErrorHandler(): Function<T, T> {
-        return object : Function<T, T> {
-            override fun apply(t: T): T {
-                if (t is BaseRepose) {
-                    if(t.state != 1 ||( t.state ==1 && t.code==11)){
-                        var exception = ExceptionHandle.ServerException()
-                        exception.code = t.code
-                        exception.message = t.msg
-                        throw  exception
-                    }
-
+        return Function<T, T> { t ->
+            if (t is BaseRepose) {
+                if(t.state != 1 ||( t.state ==1 && t.code==11)){
+                    var exception = ExceptionHandle.ServerException()
+                    exception.code = t.code
+                    exception.message = t.msg
+                    throw  exception
                 }
-                return t
-            }
 
+            }
+            t
         }
     }
 

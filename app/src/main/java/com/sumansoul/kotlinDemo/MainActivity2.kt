@@ -30,6 +30,7 @@ class MainActivity2 :
 //            replace(R.id.container, headFragment)
 //        }
         replaceFragment( headFragment,R.id.container)
+        viewModel?.getPersionData("sdasdsadas")
     }
 
     override fun onRetryBtnClick() {
@@ -54,7 +55,7 @@ class MainActivity2 :
     }
 
     override fun viewModel(): HomePagerViewModel? {
-        return null
+        return HomePagerViewModel()
     }
 
     override fun getLayoutId(): Int {

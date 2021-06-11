@@ -14,6 +14,7 @@ ext {
 
     version = [
             /*androidx-version*/
+            lifecycle_version:"2.3.1",
             androidxVersion   : "1.2.1",
             constraintlayout  : "2.0.1",
             googleVersion:"1.1.0",
@@ -28,6 +29,7 @@ ext {
             glideSdkVersion   : "4.11.0",
             smartRefreshSdkVersion:"2.0.1",
             BaseRecyclerViewAdapterHelper:"3.0.4",
+            loadsir:"1.3.6"
 
     ]
 
@@ -40,7 +42,14 @@ ext {
             "material":"com.google.android.material:material:${version["androidxVersion"]}",
             "recyclerview":"androidx.recyclerview:recyclerview:${version["googleVersion"]}",
             /*------------------------------------lifecycle-----------------------------------------*/
-            "lifecycle-extensions":'androidx.lifecycle:lifecycle-extensions:2.2.0',
+//            "lifecycle-extensions":'androidx.lifecycle:lifecycle-extensions:2.2.0',
+            /*------------------------------------ViewModel-----------------------------------------*/
+            "ViewModel":"androidx.lifecycle:lifecycle-viewmodel-ktx:${version["lifecycle_version"]}",
+            /*------------------------------------LiveData-----------------------------------------*/
+            "LiveData":"androidx.lifecycle:lifecycle-livedata-ktx:${version["lifecycle_version"]}",
+            /*------------------------------------Lifecycles -----------------------------------------*/
+            "Lifecycles":"androidx.lifecycle:lifecycle-runtime-ktx:${version["lifecycle_version"]}",
+
             /*----------------------------------kotlin   核心库*-------------------------------------*/
             "core-ktx"                : "androidx.core:core-ktx:${version["core_ktx"]}",
             /*-------------------------------------路由---------------------------------------------*/
@@ -72,6 +81,8 @@ ext {
             //经典加载
             "smart-footer-classics"                    : "com.scwang.smart:refresh-footer-classics:${version["smartRefreshSdkVersion"]}",
             "BaseRecyclerViewAdapterHelper"                    : "com.github.CymChad:BaseRecyclerViewAdapterHelper:${version["BaseRecyclerViewAdapterHelper"]}",
+            /*--------------------------------------loadsir---------------------------------------------------*/
+            "loadsir":"com.kingja.loadsir:loadsir:${version["loadsir"]}",
 
 
     ]
