@@ -38,6 +38,7 @@ android {
 }
 
 dependencies {
+    //api files('D:\\AndroidApp\\SlimStudent_Android\\lib\\IMLib\\libs\\chatroom-5.1.2.aar')
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     api project(':common')

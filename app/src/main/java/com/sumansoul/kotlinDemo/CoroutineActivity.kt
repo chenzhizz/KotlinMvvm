@@ -33,6 +33,7 @@ class CoroutineActivity : AppCompatActivity() {
                 Log.e("Tag", "$it")
             }
         }
+        var list= mutableListOf("")
     }
 
     fun onClickButton(view: View) {
