@@ -39,8 +39,8 @@ class HomeModel : MvvmBaseModel<HomePagerBean, List<TitleViewSModel>>(
     }
 
     override fun load() {
-        var baseObserver=  BaseObserver<HomePagerBean>(this)
-        SSNetWorkApi.getService(NewsApiInterface::class.java).getHomePager().compose(SSNetWorkApi.getInstance().applySchedluers(baseObserver))
+//        var baseObserver=  BaseObserver<HomePagerBean>(this)
+//        SSNetWorkApi.getService(NewsApiInterface::class.java).getHomePager().compose(SSNetWorkApi.getInstance().applySchedluers(baseObserver))
 //        SSNetWorkApi.getService(NewsApiInterface::class.java)
 //            .getNewsChagnes()
 //            .compose(SSNetWorkApi.getInstance().applySchedluers(object :

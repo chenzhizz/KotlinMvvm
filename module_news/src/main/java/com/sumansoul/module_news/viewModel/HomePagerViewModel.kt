@@ -2,6 +2,7 @@ package com.sumansoul.module_news.viewModel
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.blankj.utilcode.util.ToastUtils
 import com.sumansoul.base.model.IBaseModeListener
 import com.sumansoul.base.model.MvvmBaseModel
@@ -38,9 +39,12 @@ public class HomePagerViewModel :MvvmBaseViewModel<HomeModel, HomePagerBean, Tit
             }
 
         })
+
+
     }
      fun getPersionData(id:String){
-       //  ToastUtils.showShort("点击点点点点点点点点点点="+id)
-        mPersionDataModel.getCacheDataAndLoad()
+        // ToastUtils.showShort("点击点点点点点点点点点点="+id)
+         Log.e("TAG","点击点点点点点点点点点点="+id)
+        //mPersionDataModel.getCacheDataAndLoad()
     }
 }

@@ -1,5 +1,6 @@
 package com.sumansoul.module_news.model
 
+import android.annotation.SuppressLint
 import com.sumansoul.base.model.MvvmBaseModel
 import com.sumansoul.module_news.api.NewsApiInterface
 import com.sumansoul.module_news.api.SSNetWorkApi
