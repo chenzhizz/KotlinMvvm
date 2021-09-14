@@ -34,6 +34,17 @@ android {
         //noinspection DataBindingWithoutKapt
         enabled=true
     }
+    android.applicationVariants.all {
+        variant ->
+            variant.outputs.all {
+                //这里修改apk文件名
+                outputFileName = "${defaultConfig.applicationId}_" + buildType.name + "_v${defaultConfig.versionName}-${releaseTime()}.apk"
+            }
+    }
+}
+
+def releaseTime() {
+    return new Date().format("yyyyMMdd", TimeZone.getTimeZone("UTC"))
 }
 
 dependencies {
